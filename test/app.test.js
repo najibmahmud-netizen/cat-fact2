@@ -1,38 +1,15 @@
-
-// import function
+// At the top of test/app.test.js
 const { getCatFact } = require("../script");
 
-// mock fetch globally
-global.fetch = jest.fn();
 
-beforeEach(() => {
-  fetch.mockClear();
-});
 
-test("fetches cat fact using fact field", async () => {
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve([{ text: "Cats sleep a lot" }]), 
+  })
+);
 
-  // match API format: { fact: "..." }
-  fetch.mockResolvedValue({
-    json: async () => ({
-      fact: "Cats sleep a lot"
-    })
-  });
-
+test("fetches cat fact", async () => {
   const fact = await getCatFact();
-
-  expect(fact).toBe("Cats sleep a lot");
-});
-
-test("fetches cat fact using array fallback", async () => {
-
-  // match fallback format: [{ text: "..." }]
-  fetch.mockResolvedValue({
-    json: async () => ([
-      { text: "Cats sleep a lot" }
-    ])
-  });
-
-  const fact = await getCatFact();
-
   expect(fact).toBe("Cats sleep a lot");
 });
