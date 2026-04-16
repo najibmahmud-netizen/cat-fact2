@@ -1,43 +1,33 @@
-// FUNCTION TO FETCH CAT FACT
 async function getCatFact() {
   try {
     const res = await fetch("https://catfact.ninja/fact");
     const data = await res.json();
-
-    return data.fact || "No fact found";
-  } catch (error) {
-    return "Error loading fact ";
+    return data.fact;
+  } catch {
+    return "Error loading fact.";
   }
 }
 
-// DOM CODE
 if (typeof document !== "undefined") {
-
-    const homeBtn = document.getElementById("home-btn");
-    const factBtn = document.getElementById("fact-btn");
-    const factText = document.getElementById("fact-text");
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("factBtn");
+    const fact = document.getElementById("fact");
     const status = document.getElementById("status");
 
-  // Home button logic
-  if (homeBtn && factText) {
-    homeBtn.addEventListener("click", () => {
-      factText.textContent =
-        "Welcome to the Cat Facts Explorer! We hope you find some paws-itive information here.";
-    });
-  }
+    if (btn) {
+      btn.addEventListener("click", async () => {
+        status.textContent = "Loading...";
+        fact.textContent = "";
 
-  // Fetch fact button logic (IMPORTANT FIX)
-  if (factBtn && factText) {
-    factBtn.addEventListener("click", async () => {
-      factText.textContent = "Loading...";
+        const newFact = await getCatFact();
 
-      const fact = await getCatFact();
-      factText.textContent = fact;
-    });
-  }
+        fact.textContent = newFact;
+        status.textContent = "";
+      });
+    }
+  });
 }
 
-// export for testing
 if (typeof module !== "undefined") {
   module.exports = { getCatFact };
 }
