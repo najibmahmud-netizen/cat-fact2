@@ -1,12 +1,15 @@
+// At the top of test/app.test.js
 const { getCatFact } = require("../script");
+
+
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
-    json: () => Promise.resolve({ fact: "Cats sleep 70% of their lives." }),
+    json: () => Promise.resolve([{ text: "Cats sleep a lot" }]), 
   })
 );
 
-test("returns a cat fact", async () => {
+test("fetches cat fact", async () => {
   const fact = await getCatFact();
-  expect(fact).toBeDefined();
+  expect(fact).toBe("Cats sleep a lot");
 });
