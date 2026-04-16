@@ -34,3 +34,10 @@ cursor: pointer;
 font-weight: bold;
 border-radius: 8px;
 }
+
+/* Responsive */
+@media (max-width: 600px) {
+.card {
+width: 90%;
+}
+}
