@@ -1,56 +1,40 @@
+// PURE FUNCTION
+async function getCatFact() {
+  // We use the stable ninja API to avoid CORS and 503 errors
+  const res = await fetch("https://catfact.ninja/fact");
+  const data = await res.json();
+  
+  return data.fact || data[0].text; 
+}
 
-// importing the function from script.js
-const { getCatFact } = require("./script");
+// DOM CODE
+if (typeof document !== "undefined") {
+  const homeBtn = document.getElementById("homeBtn");
+  const factsBtn = document.getElementById("btn");
+  const factText = document.getElementById("fact");
 
-// we mock fetch so it doesn't call the real API
-global.fetch = jest.fn();
-
-describe("getCatFact function", () => {
-
-  // run before each test
-  beforeEach(() => {
-    fetch.mockClear();
-  });
-
-  test("should return a cat fact", async () => {
-
-    // fake API response
-    fetch.mockResolvedValue({
-      json: async () => ({
-        fact: "Cats sleep most of the day."
-      })
+  // Home Page logic
+  if (homeBtn && factText) {
+    homeBtn.addEventListener("click", () => {
+      factText.textContent = "Welcome to the Cat Facts Explorer! We hope you find some paws-itive information here.";
     });
+  }
 
-    const result = await getCatFact();
-
-    expect(result).toBe("Cats sleep most of the day.");
-  });
-
-  test("should handle different API format", async () => {
-
-    // sometimes API might return array format
-    fetch.mockResolvedValue({
-      json: async () => ([
-        { text: "Cats have 9 lives (not really)." }
-      ])
+  // Facts Page logic
+  if (factsBtn && factText) {
+    factsBtn.addEventListener("click", async () => {
+      factText.textContent = "Loading...";
+      try {
+        const fact = await getCatFact();
+        factText.textContent = fact;
+      } catch (error) {
+        factText.textContent = "Failed to load cat fact. Maybe the API is down?";
+      }
     });
+  }
+}
 
-    const result = await getCatFact();
-
-    expect(result).toBe("Cats have 9 lives (not really).");
-  });
-
-  test("should fail gracefully when API breaks", async () => {
-
-    // simulate API error
-    fetch.mockRejectedValue(new Error("Network Error"));
-
-    try {
-      await getCatFact();
-    } catch (error) {
-      expect(error).toBeDefined();
-    }
-
-  });
-
-});
+// Export for Jest
+if (typeof module !== "undefined") {
+  module.exports = { getCatFact };
+}
