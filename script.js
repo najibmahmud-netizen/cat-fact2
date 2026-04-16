@@ -2,7 +2,6 @@
 async function getCatFact() {
   // We use the stable ninja API to avoid CORS and 503 errors
   const response = await fetch("https://catfact.ninja/fact");
-  const data = await response.json();
   
   return data.fact || data[0].text; 
 }
