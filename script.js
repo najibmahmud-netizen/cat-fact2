@@ -1,34 +1,51 @@
-console.log("JS LOADED");
-async function getCatFact() {
-  try {
-    const res = await fetch("https://catfact.ninja/fact");
-    const data = await res.json();
-    return data.fact;
-  } catch {
-    return "Error loading fact.";
+// Wait until the page is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("JS LOADED");
+
+  // Get elements
+  const btn = document.getElementById("factBtn");
+  const factText = document.getElementById("factText");
+
+  // Safety check (prevents null errors)
+  if (!btn) {
+    console.error("Button with id 'factBtn' not found!");
+    return;
   }
-}
 
-if (typeof document !== "undefined") {
-  document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("factBtn");
-    const fact = document.getElementById("fact");
-    const status = document.getElementById("status");
+  if (!factText) {
+    console.error("Element with id 'factText' not found!");
+    return;
+  }
 
-    if (btn) {
-      btn.addEventListener("click", async () => {
-        status.textContent = "Loading...";
-        fact.textContent = "";
+  // Fetch function (PURE + reusable)
+  async function getCatFact() {
+    try {
+      const res = await fetch("https://catfact.ninja/fact");
 
-        const newFact = await getCatFact();
+      // If API fails
+      if (!res.ok) {
+        throw new Error("Failed to fetch cat fact");
+      }
 
-        fact.textContent = newFact;
-        status.textContent = "";
-      });
+      const data = await res.json();
+
+      return data.fact;
+    } catch (error) {
+      console.error("API Error:", error);
+      return "Could not load cat fact. Try again.";
     }
-  });
-}
+  }
 
-if (typeof module !== "undefined") {
-  module.exports = { getCatFact };
-}
+  // Button click event
+  btn.addEventListener("click", async () => {
+    console.log("clicked");
+
+    // Loading state
+    factText.textContent = "Loading cat fact...";
+    // Get fact
+    const fact = await getCatFact();
+
+    // Display fact
+    factText.textContent = fact;
+  });
+});
