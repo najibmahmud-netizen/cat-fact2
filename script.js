@@ -1,3 +1,4 @@
+console.log("JS LOADED");
 async function getCatFact() {
   try {
     const res = await fetch("https://catfact.ninja/fact");
