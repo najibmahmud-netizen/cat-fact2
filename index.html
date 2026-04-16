@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Home - Cat Facts</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cat Facts Explorer</title>
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<nav class="navbar">
-<a href="index.html">Home</a>
-<a href="facts.html">Facts</a>
-<a href="about.html">About</a>
-</nav>
+ <nav class="navbar">
+  <a href="index.html">Home</a>
+  <a href="facts.html">Facts</a>
+  <a href="about.html">About</a>
+</nav>   
+
 
 <div class="container">
-<h1>Welcome </h1>
-<p>Your daily dose of cat knowledge.</p>
-<a href="facts.html"><button>Explore Facts</button></a>
-</div>
+    <h1> Cat Facts Explorer</h1>
 
-<footer>
-<p>&copy; 2024 Cat Facts. All rights reserved.</p>
-</footer>
+    <div class="card">
+      <p id="fact">Click the button to get a welcome message </p>
 
+      <button id="homeBtn">get a welcome</button>
+
+      <!-- optional loading text -->
+      <small id="status"></small>
+    </div>
+
+    <!-- footer (adds polish) -->
+    <footer>
+      <p>Powered by Cat Fact API</p>
+    </footer>
+  </div>
+
+  <!-- JS at bottom (best practice) -->
+  <script src="script.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   "description": "Cat Facts project using HTML, CSS, and vanilla JavaScript",
   "scripts": {
     "start": "live-server",
-    "test": "echo \"No tests defined\""
+    "test": "jest"
   },
   "keywords": ["cat", "facts", "api", "javascript"],
   "author": "",
