@@ -1,51 +1,40 @@
-// Wait until the page is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("JS LOADED");
+// PURE FUNCTION
+async function getCatFact() {
+  // We use the stable ninja API to avoid CORS and 503 errors
+  const res = await fetch("https://catfact.ninja/fact");
+  const data = await res.json();
+  
+  return data.fact || data[0].text; 
+}
 
-  // Get elements
-  const btn = document.getElementById("factBtn");
-  const factText = document.getElementById("factText");
+// DOM CODE
+if (typeof document !== "undefined") {
+  const homeBtn = document.getElementById("homeBtn");
+  const factsBtn = document.getElementById("btn");
+  const factText = document.getElementById("fact");
 
-  // Safety check (prevents null errors)
-  if (!btn) {
-    console.error("Button with id 'factBtn' not found!");
-    return;
+  // Home Page logic
+  if (homeBtn && factText) {
+    homeBtn.addEventListener("click", () => {
+      factText.textContent = "Welcome to the Cat Facts Explorer! We hope you find some paws-itive information here.";
+    });
   }
 
-  if (!factText) {
-    console.error("Element with id 'factText' not found!");
-    return;
-  }
-
-  // Fetch function (PURE + reusable)
-  async function getCatFact() {
-    try {
-      const res = await fetch("https://catfact.ninja/fact");
-
-      // If API fails
-      if (!res.ok) {
-        throw new Error("Failed to fetch cat fact");
+  // Facts Page logic
+  if (factsBtn && factText) {
+    factsBtn.addEventListener("click", async () => {
+      factText.textContent = "Loading...";
+      try {
+        const fact = await getCatFact();
+        factText.textContent = fact;
+      } catch (error) {
+        factText.textContent = "Failed to load cat fact. Maybe the API is down?";
       }
-
-      const data = await res.json();
-
-      return data.fact;
-    } catch (error) {
-      console.error("API Error:", error);
-      return "Could not load cat fact. Try again.";
-    }
+    });
   }
+}
 
-  // Button click event
-  btn.addEventListener("click", async () => {
-    console.log("clicked");
-
-    // Loading state
-    factText.textContent = "Loading cat fact...";
-    // Get fact
-    const fact = await getCatFact();
-
-    // Display fact
-    factText.textContent = fact;
-  });
-});
+// Export for Jest
+if (typeof module !== "undefined") {
+  module.exports = { getCatFact };
+}
