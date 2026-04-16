@@ -13,9 +13,14 @@ async function getCatFact() {
 // DOM CODE
 if (typeof document !== "undefined") {
 
-  const homeBtn = document.getElementById("homeBtn");
-  const factBtn = document.getElementById("factBtn");
-  const factText = document.getElementById("fact");
+  const status = document.getElementById("status");
+
+factBtn.addEventListener("click", async () => {
+  status.textContent = "Loading...";
+  const fact = await getCatFact();
+  factText.textContent = fact;
+  status.textContent = "";
+});
 
   // Home button logic
   if (homeBtn && factText) {
