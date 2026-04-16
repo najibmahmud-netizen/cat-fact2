@@ -1,12 +1,12 @@
 {
   "name": "cat-fact2",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Cat Facts project using HTML, CSS, and vanilla JavaScript",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "live-server",
+    "test": "echo \"No tests defined\""
   },
-  "keywords": [],
+  "keywords": ["cat", "facts", "api", "javascript"],
   "author": "",
   "license": "ISC"
 }
