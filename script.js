@@ -1,3 +1,4 @@
+console.log("JS LOADED");
 // PURE FUNCTION
 async function getCatFact() {
   // We use the stable ninja API to avoid CORS and 503 errors
@@ -26,7 +27,7 @@ if (typeof document !== "undefined") {
       factText.textContent = "Loading...";
       try {
         const fact = await getCatFact();
-        factText.textContent = fact;
+        factText.textContent = fact; 
       } catch (error) {
         factText.textContent = "Failed to load cat fact. Maybe the API is down?";
       }
