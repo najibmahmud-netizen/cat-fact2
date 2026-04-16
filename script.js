@@ -1,23 +1,14 @@
-/ PURE FUNCTION
+// PURE FUNCTION
 async function getCatFact() {
-  try {
-    // 1. Fetch the data
-    const response = await fetch("https://catfact.ninja/fact");
-    
-    // 2. Parse the JSON (This was missing!)
-    const data = await response.json();
-    
-    // 3. Return the specific fact string from the object
-    return data.fact; 
-  } catch (error) {
-    console.error("Error fetching cat fact:", error);
-    throw error; // Pass the error to the UI logic to handle
-  }
+  // We use the stable ninja API to avoid CORS and 503 errors
+  const response = await fetch("https://catfact.ninja/fact");
+  const data = await response.json();
+  
+  return data.fact || data[0].text; 
 }
 
 // DOM CODE
 if (typeof document !== "undefined") {
-  // Use unique IDs or check for existence carefully
   const homeBtn = document.getElementById("homeBtn");
   const factsBtn = document.getElementById("btn");
   const factText = document.getElementById("fact");
