@@ -6,7 +6,7 @@ async function getCatFact() {
 
     return data.fact || "No fact found";
   } catch (error) {
-    return "Error loading fact 😿";
+    return "Error loading fact ";
   }
 }
 
