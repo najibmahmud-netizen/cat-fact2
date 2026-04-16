@@ -1,64 +1,61 @@
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", Arial;
   background: #1F2937;
   color: white;
-}
-
-/* NAV */
-.navbar {
-  background: #111827;
-  padding: 15px;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+}
+
+.card {
+  background: #111827;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 400px;
+}
+
+#fact {
+  font-family: "Roboto Mono";
+  margin-bottom: 20px;
+}
+
+button {
+  background: #F9A826;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .card {
+    width: 90%;
+  }
+}
+
+.navbar {
+  background: #111827;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
 .navbar a {
   color: white;
   text-decoration: none;
+  font-weight: bold;
 }
 
-/* LAYOUT */
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 90vh;
-  text-align: center;
-}
-
-/* CARD */
-.card {
-  background: #111827;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 400px;
-}
-
-/* TEXT */
-h1 {
-  font-family: "Playfair Display", serif;
-}
-
-#fact {
-  font-family: "Roboto Mono", monospace;
-  margin-bottom: 15px;
-}
-
-/* BUTTON */
-button {
-  background: #F9A826;
-  border: none;
-  padding: 10px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  .card {
-    width: 90%;
-  }
+.navbar a:hover {
+  text-decoration: underline;
 }
