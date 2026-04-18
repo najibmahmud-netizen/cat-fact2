@@ -47,7 +47,13 @@ button {
   padding: 10px;
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
+  position: fixed;  /* Keep the navbar fixed at the top */
+  top: 0;
+  width: 100%;
+  left: 0;
+
+
 }
 
 .navbar a {
