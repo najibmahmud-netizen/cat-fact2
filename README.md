@@ -19,30 +19,6 @@ The application uses `script.js` for DOM logic and API calls, and `style.css` fo
 - Works in the browser without frameworks
 - Includes a basic test setup with Jest
 
-## Getting Started
-
-### Install dependencies
-
-```bash
-npm install
-```
-
-### Run locally
-
-```bash
-npm start
-```
-
-This command starts `live-server` and opens the site in your browser.
-
-### Run tests
-
-```bash
-npm test
-```
-
-This runs the Jest test suite.
-
 ## Project Structure
 
 - `index.html` - landing page
