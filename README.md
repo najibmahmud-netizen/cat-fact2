@@ -1,4 +1,5 @@
 Author: Najib Mahmud
+
 # Cat Facts Explorer
 
 A simple web project that delivers cat facts using HTML, CSS, and vanilla JavaScript.
@@ -17,7 +18,7 @@ A simple web project that delivers cat facts using HTML, CSS, and vanilla JavaSc
 Follow these steps to run the project locally:
 
 Clone the repository:
-git clone git@github.com:najibmahmud-netizen/phase-0-js-css-layouts-lab.git
+git clone git@github.com:najibmahmud-netizen/cat-fact2.git
 Navigate into the project folder:
 cd yourproject
 Install dependencies:
